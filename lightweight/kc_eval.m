@@ -30,14 +30,14 @@ for i = 1:N
     index = cluster_map(pred_label(i));
     cluster_count(index) = cluster_count(index) + 1;
 end
-%% compute purity v2 找出cluster=i的样本，其中属于哪个class的数量最多
+%% compute purity v2 
 purity = 0;
 for i = 1:num_clusters
-    member = find(pred_label == cluster_label(i));%找出cluster=i的样本
-    member_ids = true_label(member); %这些样本对应的真实label
+    member = find(pred_label == cluster_label(i));
+    member_ids = true_label(member); 
     count = zeros(1, num_classes);
-    for j = 1:numel(member) %cluster=i的样本中，哪一真实标签最多
-        index = class_map(member_ids(j));%真实label 映射到 1:num_classes
+    for j = 1:numel(member) 
+        index = class_map(member_ids(j));
         count(index) = count(index) + 1;
     end
     purity = purity + max(count);
